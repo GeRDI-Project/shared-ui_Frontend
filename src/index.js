@@ -1,6 +1,10 @@
-module.exports = {
-  Footer: require('./components/Footer/Footer.vue'),
-  install(Vue){
-    Vue.component('Footer', module.exports.Footer)
-  }
+import Vue from 'vue'
+import StaticFootr from './Footer.vue'
+
+const previewComponent =  {
+    install: function (Vue, options) {
+        Vue.component('static-footer', StaticFootr)
+    }
 }
+
+export default previewComponent;
