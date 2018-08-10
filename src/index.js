@@ -1,11 +1,15 @@
 import Vue from 'vue'
-import StaticFootr from './Footer.vue'
-import StaticNavMenu from './NavMenu.vue'
+import AppFooter from './AppFooter.vue'
+import DocumentMedia from './DocumentMedia.vue'
+import NavMenu from './NavMenu.vue'
+import PaginationBar from './PaginationBar.vue'
 
 const StaticComponent =  {
     install: function (Vue, options) {
-        Vue.component('static-footer', StaticFootr)
-        Vue.component('static-navMenu', StaticNavMenu)
+        Vue.component('app-footer', AppFooter)
+        Vue.component('document-media', DocumentMedia)
+        Vue.component('nav-menu', NavMenu)
+        Vue.component('paginationBar', PaginationBar)
     }
 }
 
