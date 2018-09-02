@@ -3,12 +3,21 @@ import AppFooter from './AppFooter.vue'
 import DocumentMedia from './DocumentMedia.vue'
 import PaginationBar from './PaginationBar.vue'
 
-const StaticComponent =  {
+const SharedUI =  {
     install: function (Vue, options) {
+        if (Vue._gerdi_shared_ui) {
+            return
+        }
+
+        Vue._gerdi_shared_ui = true
+
+        // Register component
         Vue.component('app-footer', AppFooter)
         Vue.component('document-media', DocumentMedia)
         Vue.component('paginationBar', PaginationBar)
+
+        // Register util plugin
     }
 }
 
-export default StaticComponent;
+export default SharedUI;

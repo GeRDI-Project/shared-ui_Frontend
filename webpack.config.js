@@ -5,7 +5,7 @@ module.exports = {
     entry: path.resolve(__dirname,"./src/index.js"),
     output: {
         path: path.resolve(__dirname, './dist/'),
-        filename: "static-content-module.min.js"
+        filename: "shared-ui-module.min.js"
     },
     module: {
         rules: [
