@@ -9,6 +9,14 @@ module.exports = {
     },
     module: {
         rules: [
+              {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                  limit: 10000,
+                  name: path.posix.join('static', 'img/[name].[hash:7].[ext]')
+                }
+              },
             {
                 test: /\.vue$/,
                 loader: "vue-loader",
