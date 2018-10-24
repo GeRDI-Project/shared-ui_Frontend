@@ -7,8 +7,8 @@
     "build": "webpack"
   },
   "files": [
-    "scss/**/*.scss"
-    "src/**/*.vue"
+    "scss",
+    "src"
   ],
   "license": "MIT",
   "dependencies": {
