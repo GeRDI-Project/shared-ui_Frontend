@@ -1,10 +1,10 @@
 <template>
 <footer class="bg-primary footer">
-  <p>GeRDI &copy; 2016-2018</p>
+  <p>Copyright &copy; 2016-2019 GeRDI</p>
   <div class="footer-links">
     <a href="http://www.gerdi-project.de/contact/">Contact Us</a>
     <a href="https://www.lrz.de/datenschutzerklaerungen/datenschutzerklaerung_cloud/">Privacy Policy</a>
-    <a href="http://www.gerdi-project.de/imprint/">Impressum</a>
+    <a href="http://www.gerdi-project.de/imprint/">Imprint</a>
   </div>
 </footer>
 </template>
