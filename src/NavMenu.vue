@@ -25,9 +25,7 @@
           <b-button @click="closeUsrPopover()" class="close" aria-label="Close" variant="link">
             <span class="d-inline-block" aria-hidden="true">&times;</span>
           </b-button>
-          <div class="text-center p-2">Hello, you are logged in as USERNAME.</strong></div>
-          <b-btn block size="sm" variant="link">Settings</b-btn>
-          <b-btn @click="auth()" block size="sm" variant="outline-primary">Log me in</b-btn>
+          <user-details/>
         </b-popover>
       </b-navbar-nav>
     </b-collapse>
@@ -37,9 +35,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import UserDetails from './UserDetails.vue'
 /* eslint-disable */
 export default {
   name: 'nav-menu',
+  components: {
+    UserDetails
+  },
   data() {
     return {
       usrPopover: false
