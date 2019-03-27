@@ -3,8 +3,9 @@ import AppFooter from './AppFooter.vue'
 import DocumentMedia from './DocumentMedia.vue'
 import PaginationBar from './PaginationBar.vue'
 import NavMenu from './NavMenu.vue'
+import oidcStore from './oidcStoreModule'
 
-const SharedUI =  {
+export const sharedUI = {
     install: function (Vue, options) {
         if (Vue._gerdi_shared_ui) {
             return
@@ -22,4 +23,6 @@ const SharedUI =  {
     }
 }
 
-export default SharedUI;
+export const sharedUiStore = oidcStore;
+
+export default sharedUI;

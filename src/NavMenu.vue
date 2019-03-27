@@ -1,6 +1,6 @@
 <template>
 <div>
-  <b-alert show variant="dark"> This is the current release of the Generic Research Data Infrastructure in an alpha
+  <b-alert show variant="dark">This is the current release of the Generic Research Data Infrastructure in an alpha
     stage. Selected basic functions are already usable. They are based on the latest technologies and are often still
     in an experimental stage. Please note that due to ongoing implementation, interruptions or unavailability of
     individual features and services may occur.</b-alert>
@@ -20,10 +20,15 @@
       </b-navbar-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item href="#" v-b-modal.modal1><i class="material-icons">account_circle</i></b-nav-item>
-        <b-modal id="modal1" title="Set Username" @ok="saveUsername">
-          <b-form-input v-model="username" type="text" placeholder="Enter your username"></b-form-input>
-        </b-modal>
+        <b-nav-item href="#" id="usr-popover"><i class="material-icons">account_circle</i></b-nav-item>
+        <b-popover  triggers="focus" ref="popover" :show.sync="usrPopover" target="usr-popover">
+          <b-button @click="closeUsrPopover()" class="close" aria-label="Close" variant="link">
+            <span class="d-inline-block" aria-hidden="true">&times;</span>
+          </b-button>
+          <div class="text-center p-2">Hello, you are logged in as USERNAME.</strong></div>
+          <b-btn block size="sm" variant="link">Settings</b-btn>
+          <b-btn @click="auth()" block size="sm" variant="outline-primary">Log me in</b-btn>
+        </b-popover>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -31,34 +36,23 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 /* eslint-disable */
-
-import axios from 'axios'
-import usercookie from './util/usercookie.js'
 export default {
   name: 'nav-menu',
   data() {
     return {
-      val: ""
+      usrPopover: false
     }
   },
-  computed: {
-    username: {
-      get: function() {
-        return usercookie.getUsername()
-      },
-      set: function(val) {
-        this.val = val
-      }
-    }
-  },
-
   methods: {
-    saveUsername(evt) {
-      if(this.val != ""){
-        document.cookie = 'username=' + this.val
-      }
-    }
+    closeUsrPopover() {
+      this.usrPopover = false
+    },
+    auth: function() {
+      this.authenticateOidc(window.location.pathname)
+    },
+    ...mapActions('oidcStore', ['authenticateOidc']),
   }
 }
 </script>
@@ -71,7 +65,6 @@ export default {
   line-height: 1.1;
   letter-spacing: 0.1px;
   margin-bottom: 0;
-
 }
 
 .navbar-nav > .nav-item {
@@ -83,6 +76,5 @@ export default {
   padding: 0;
   margin-top: 50px;
   color: #083f64;
-
 }
 </style>
