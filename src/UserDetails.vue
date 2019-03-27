@@ -3,6 +3,7 @@
     <div class="text-center p-2">Hello, you are logged in as USERNAME.</div>
     <b-btn block size="sm" variant="link">Settings</b-btn>
     <b-btn @click="debug()" block size="sm" variant="outline-primary">DEBUG</b-btn>
+    <b-btn @click="signOut()" block size="sm" variant="outline-primary">Sign out</b-btn>
   </div>
   <div v-else>
     <div class="text-center p-2">Hello, you are currently not logged in.</div>
@@ -20,6 +21,9 @@ export default {
       usrPopover: false
     }
   },
+  created: function () {
+    this.authenticateOidcSilent()
+  }
   computed: {
     ...mapGetters('oidcStore', ['oidcIsAuthenticated','oidcUser'])
   },
@@ -33,7 +37,10 @@ export default {
     debug: function() {
       console.log(this.oidcUser)
     },
-    ...mapActions('oidcStore', ['authenticateOidc']),
+    signOut: function () {
+      this.signOutOidc()
+    },
+    ...mapActions('oidcStore', ['authenticateOidc', 'authenticateOidcSilent', 'signOutOidc']),
   }
 }
 </script>
