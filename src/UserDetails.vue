@@ -1,7 +1,6 @@
 <template>
   <div v-if="oidcIsAuthenticated">
-    <div class="text-center p-2">Hello, you are logged in as USERNAME.</div>
-    <b-btn block size="sm" variant="link">Settings</b-btn>
+    <div class="text-center p-2">Hello{{ userName }}, you are logged in.</div>
     <b-btn @click="debug()" block size="sm" variant="outline-primary">DEBUG</b-btn>
     <b-btn @click="signOut()" block size="sm" variant="outline-primary">Sign out</b-btn>
   </div>
@@ -25,7 +24,14 @@ export default {
     this.authenticateOidcSilent()
   },
   computed: {
-    ...mapGetters('oidcStore', ['oidcIsAuthenticated','oidcUser'])
+    ...mapGetters('oidcStore', ['oidcIsAuthenticated','oidcUser']),
+    username: function() {
+      if (this.oidcUser.given_name) {
+        return ' ' + this.oidcUser.given_name
+      } else {
+        return ''
+      }
+    }
   },
   methods: {
     closeUsrPopover() {
