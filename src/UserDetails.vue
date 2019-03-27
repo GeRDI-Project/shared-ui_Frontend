@@ -26,7 +26,7 @@ export default {
   computed: {
     ...mapGetters('oidcStore', ['oidcIsAuthenticated','oidcUser']),
     username: function() {
-      if (this.oidcUser.given_name) {
+      if (typeof this.oidcUser.given_name !== 'undefined') {
         return ' ' + this.oidcUser.given_name
       } else {
         return ''
