@@ -23,7 +23,7 @@ export default {
   },
   created: function () {
     this.authenticateOidcSilent()
-  }
+  },
   computed: {
     ...mapGetters('oidcStore', ['oidcIsAuthenticated','oidcUser'])
   },
