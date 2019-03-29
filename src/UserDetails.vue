@@ -1,5 +1,5 @@
 <template>
-  <div v-if="oidcIsAuthenticated">
+  <div v-if="isAuthenticated">
     <div class="text-center p-2">Hello{{ userName }}, you are logged in.</div>
     <b-btn @click="debug()" block size="sm" variant="outline-primary">DEBUG</b-btn>
     <b-btn @click="signOut()" block size="sm" variant="outline-primary">Sign out</b-btn>
@@ -21,16 +21,18 @@ export default {
     }
   },
   created: function () {
-    this.authenticateOidcSilent()
+    this.$gerdi.aai.signInUserSilent()
   },
   computed: {
-    ...mapGetters('oidcStore', ['oidcIsAuthenticated','oidcUser']),
     username: function() {
-      if (this.oidcIsAuthenticated && typeof this.oidcUser.given_name !== 'undefined') {
-        return ' ' + this.oidcUser.given_name
+      if (this.isAuthenticated && typeof this.this.$gerdi.aai.getUser.given_name !== 'undefined') {
+        return ' ' + this.this.$gerdi.aai.getUser.given_name
       } else {
         return ''
       }
+    },
+    isAuthenticated: function () {
+      this.$gerdi.aai.isAuthenticated
     }
   },
   methods: {
@@ -38,15 +40,14 @@ export default {
       this.usrPopover = false
     },
     auth: function() {
-      this.authenticateOidc(window.location.pathname)
+      this.$gerdi.aai.signInUser()
     },
     debug: function() {
-      console.log(this.oidcUser)
+      console.log(this.$gerdi.aai.getUser)
     },
     signOut: function () {
-      this.signOutOidc()
-    },
-    ...mapActions('oidcStore', ['authenticateOidc', 'authenticateOidcSilent', 'signOutOidc']),
+      this.signOut()
+    }
   }
 }
 </script>

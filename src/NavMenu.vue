@@ -19,7 +19,7 @@
         <b-nav-item href="#" disabled>Submit</b-nav-item>
       </b-navbar-nav>
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto">
+      <b-navbar-nav v-if="isAaiEnabled" class="ml-auto">
         <b-nav-item href="#" id="usr-popover"><i class="material-icons">account_circle</i></b-nav-item>
         <b-popover  triggers="focus" ref="popover" :show.sync="usrPopover" target="usr-popover">
           <b-button @click="closeUsrPopover()" class="close" aria-label="Close" variant="link">
@@ -45,6 +45,11 @@ export default {
   data() {
     return {
       usrPopover: false
+    }
+  },
+  computed: {
+    isAaiEnabled: function () {
+      return this.$gerdi.aai.enabled
     }
   },
   methods: {
