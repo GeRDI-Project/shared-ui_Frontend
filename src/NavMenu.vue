@@ -55,11 +55,7 @@ export default {
   methods: {
     closeUsrPopover() {
       this.usrPopover = false
-    },
-    auth: function() {
-      this.authenticateOidc(window.location.pathname)
-    },
-    ...mapActions('oidcStore', ['authenticateOidc']),
+    }
   }
 }
 </script>

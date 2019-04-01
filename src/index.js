@@ -25,8 +25,8 @@ export const sharedUI = {
         // Register router module
         if (typeof options.store === 'undefined') {
           Vue.prototype.$gerdiAai = { enabled: false }
-          return
-        }// If there is no store, register nothing
+          return // If there is no store, register nothing
+        }
         options.store.registerModule('oidcStore', oidcStore)
         Vue.prototype.$gerdi = gerdiAaiFunctions(options.store)
     }
