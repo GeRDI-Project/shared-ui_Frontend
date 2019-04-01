@@ -4,6 +4,7 @@ export const gerdiAaiFunctions = function(store) {
   let signOutUser = function () { store.dispatch('oidcStore/signOutOidc') }
   let getUser = function () { return store.getters['oidcStore/oidcUser'] }
   let isAuthenticated = function () { return store.getters['oidcStore/oidcIsAuthenticated'] }
+  let isChecked = function () { return store.getters['oidcStore/oidcAuthenticationIsChecked'] }
   return {
     aai: {
       enabled: true,
@@ -11,7 +12,8 @@ export const gerdiAaiFunctions = function(store) {
       signInUserSilent: signInUserSilent,
       signOutUser: signOutUser,
       getUser: getUser,
-      isAuthenticated: isAuthenticated
+      isAuthenticated: isAuthenticated,
+      isChecked: isChecked
     }
   }
 }

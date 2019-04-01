@@ -20,13 +20,14 @@
       </b-navbar-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav v-if="isAaiEnabled" class="ml-auto">
-        <b-nav-item href="#" id="usr-popover"><i class="material-icons">account_circle</i></b-nav-item>
-        <b-popover  triggers="focus" ref="popover" :show.sync="usrPopover" target="usr-popover">
+        <b-nav-item href="#" id="usr-popover" v-show="isAuthChecked"><i class="material-icons">account_circle</i></b-nav-item>
+        <b-popover triggers="focus" ref="popover" :show.sync="usrPopover" target="usr-popover">
           <b-button @click="closeUsrPopover()" class="close" aria-label="Close" variant="link">
             <span class="d-inline-block" aria-hidden="true">&times;</span>
           </b-button>
           <user-details/>
         </b-popover>
+        <b-nav-item v-show="!isAuthChecked"><b-spinner small label="Loading..."></b-spinner></b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -34,7 +35,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import UserDetails from './UserDetails.vue'
 /* eslint-disable */
 export default {
@@ -47,9 +47,15 @@ export default {
       usrPopover: false
     }
   },
+  created: function () {
+    this.$gerdi.aai.signInUserSilent()
+  },
   computed: {
     isAaiEnabled: function () {
       return this.$gerdi.aai.enabled
+    },
+    isAuthChecked: function () {
+      return this.$gerdi.aai.isChecked()
     }
   },
   methods: {

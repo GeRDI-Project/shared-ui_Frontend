@@ -19,9 +19,6 @@ export default {
       usrPopover: false
     }
   },
-  created: function () {
-    this.$gerdi.aai.signInUserSilent()
-  },
   computed: {
     username: function() {
       if (this.isAuthenticated && typeof this.$gerdi.aai.getUser().given_name !== 'undefined') {
