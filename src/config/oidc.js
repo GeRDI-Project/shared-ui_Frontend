@@ -5,5 +5,6 @@ export const oidcSettings = {
   response_type: 'id_token token',
   scope: 'openid email',
   automaticSilentRenew: true,
-  silent_redirect_uri: 'https://test.gerdi.org/callback/silent-renew-oidc.html'
+  silent_redirect_uri: 'https://test.gerdi.org/callback/silent-renew-oidc.html',
+  post_logout_redirect_uri: 'https://test.gerdi.org'
 }
