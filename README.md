@@ -52,11 +52,12 @@ It is accessible through the global variable `$gerdi` and its subfield `aai`. Fo
 
 Available methods:
 
-* `signInUser(*ref -> The path which the user will be redirected to) : void`
-* `signInUserSilent() : void`
-* `signOutUser() : void`
-* `getUser() : User`
-* `isAuthenticated() : boolean`
+* `signInUser(*ref : String) : void` Sign in the user. `ref` depicts the path were the user will be forwarded to.
+* `signInUserSilent() : void` Performs a check in the background to see if the user is already logged in.
+* `signOutUser() : void` Signs out the user.
+* `getUser() : User` Returns the user instance.
+* `isAuthenticated() : boolean` Whether or not the user is logged in. Only reliable after `isChecked()`.
+* `isChecked(): boolean` Whether or not the login was already checked
 \* optional parameter
 
 Furthermore, the field `this.$gerdi.aai.enabled : boolean` shows if the AAI functions are enabled or not.
