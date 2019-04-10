@@ -3,7 +3,7 @@ export const oidcSettings = {
   client_id: 'test',
   redirect_uri: 'https://test.gerdi.org/callback/oidc-callback',
   response_type: 'id_token token',
-  scope: 'openid email',
+  scope: 'openid email roles',
   automaticSilentRenew: true,
   silent_redirect_uri: 'https://test.gerdi.org/callback/silent-renew-oidc.html',
   post_logout_redirect_uri: 'https://test.gerdi.org'
