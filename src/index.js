@@ -3,8 +3,10 @@ import AppFooter from './AppFooter.vue'
 import DocumentMedia from './DocumentMedia.vue'
 import PaginationBar from './PaginationBar.vue'
 import NavMenu from './NavMenu.vue'
+import oidcStore from './oidcStoreModule'
+import {gerdiAaiFunctions} from './aaiFunction'
 
-const SharedUI =  {
+export const sharedUI = {
     install: function (Vue, options) {
         if (Vue._gerdi_shared_ui) {
             return
@@ -19,7 +21,15 @@ const SharedUI =  {
         Vue.component('nav-menu', NavMenu)
 
         // Register util plugin
+
+        // Register router module
+        if (typeof options.store === 'undefined') {
+          Vue.prototype.$gerdi = { aai: { enabled: false } }
+          return // If there is no store, register nothing
+        }
+        options.store.registerModule('oidcStore', oidcStore)
+        Vue.prototype.$gerdi = gerdiAaiFunctions(options.store)
     }
 }
 
-export default SharedUI;
+export default sharedUI;

@@ -32,7 +32,10 @@ export default {
     },
     filterForViewURI(linksArray) {
       if(linksArray) {
-        return linksArray.filter(elem => elem.webLinkType == 'ViewURL')[0].webLinkURI
+        var webLinks = linksArray.filter(elem => elem.webLinkType == 'ViewURL')
+        if (webLinks.length > 0){
+          return webLinks[0].webLinkURI
+        }
       }
       return '#'
     },

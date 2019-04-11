@@ -1,6 +1,6 @@
 <template>
 <div>
-  <b-alert show variant="dark"> This is the current release of the Generic Research Data Infrastructure in an alpha
+  <b-alert show variant="dark">This is the current release of the Generic Research Data Infrastructure in an alpha
     stage. Selected basic functions are already usable. They are based on the latest technologies and are often still
     in an experimental stage. Please note that due to ongoing implementation, interruptions or unavailability of
     individual features and services may occur.</b-alert>
@@ -19,11 +19,16 @@
         <b-nav-item href="#" disabled>Submit</b-nav-item>
       </b-navbar-nav>
       <!-- Right aligned nav items -->
-      <b-navbar-nav class="ml-auto">
-        <b-nav-item href="#" v-b-modal.modal1><i class="material-icons">account_circle</i></b-nav-item>
-        <b-modal id="modal1" title="Set Username" @ok="saveUsername">
-          <b-form-input v-model="username" type="text" placeholder="Enter your username"></b-form-input>
-        </b-modal>
+      <b-navbar-nav v-if="isAaiEnabled" class="ml-auto">
+        <b-nav-item href="#" id="usr-popover" v-if="isAuthChecked && user !== null">Hello, {{ username }}</b-nav-item>
+        <b-popover v-if="isAuthChecked && user !== null" triggers="focus" ref="popover" :show.sync="usrPopover" target="usr-popover">
+          <b-button @click="closeUsrPopover()" class="close" aria-label="Close" variant="link">
+            <span class="d-inline-block" aria-hidden="true">&times;</span>
+          </b-button>
+          <user-details/>
+        </b-popover>
+        <b-nav-item href="#" @click="login()" v-if="isAuthChecked && user === null">Log in</b-nav-item>
+        <b-nav-item v-if="!isAuthChecked"><b-spinner small label="Loading..."></b-spinner></b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -31,33 +36,41 @@
 </template>
 
 <script>
+import UserDetails from './UserDetails.vue'
 /* eslint-disable */
-
-import axios from 'axios'
-import usercookie from './util/usercookie.js'
 export default {
   name: 'nav-menu',
+  components: {
+    UserDetails
+  },
   data() {
     return {
-      val: ""
+      usrPopover: false
     }
+  },
+  created: function () {
+    this.$gerdi.aai.signInUserSilent()
   },
   computed: {
-    username: {
-      get: function() {
-        return usercookie.getUsername()
-      },
-      set: function(val) {
-        this.val = val
-      }
+    isAaiEnabled: function () {
+      return this.$gerdi.aai.enabled
+    },
+    isAuthChecked: function () {
+      return this.$gerdi.aai.isChecked()
+    },
+    user: function () {
+      return this.$gerdi.aai.getUser()
+    },
+    username: function () {
+      return this.user.given_name
     }
   },
-
   methods: {
-    saveUsername(evt) {
-      if(this.val != ""){
-        document.cookie = 'username=' + this.val
-      }
+    closeUsrPopover() {
+      this.usrPopover = false
+    },
+    login() {
+      this.$gerdi.aai.signInUser()
     }
   }
 }
@@ -71,7 +84,6 @@ export default {
   line-height: 1.1;
   letter-spacing: 0.1px;
   margin-bottom: 0;
-
 }
 
 .navbar-nav > .nav-item {
@@ -83,6 +95,5 @@ export default {
   padding: 0;
   margin-top: 50px;
   color: #083f64;
-
 }
 </style>
