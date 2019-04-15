@@ -49,7 +49,7 @@ export default {
     }
   },
   created: function () {
-    this.$gerdi.aai.signInUserSilent()
+    if (this.$gerdi.aai.enabled === true) this.$gerdi.aai.signInUserSilent()
   },
   computed: {
     isAaiEnabled: function () {

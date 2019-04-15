@@ -23,7 +23,7 @@ export const sharedUI = {
         // Register util plugin
 
         // Register router module
-        if (typeof options.store === 'undefined') {
+        if (typeof options === 'undefined' || typeof options.store === 'undefined') {
           Vue.prototype.$gerdi = { aai: { enabled: false } }
           return // If there is no store, register nothing
         }
