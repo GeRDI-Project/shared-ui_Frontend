@@ -13,7 +13,7 @@
       <b-navbar-nav>
         <b-nav-item href="/">Search</b-nav-item>
         <b-nav-item href="/bookmark">Bookmark</b-nav-item>
-        <b-nav-item href="#">Store</b-nav-item>
+        <b-nav-item href="#" disabled>Store</b-nav-item>
         <b-nav-item href="#" disabled>Process</b-nav-item>
         <b-nav-item href="#" disabled>Analyze</b-nav-item>
         <b-nav-item href="#" disabled>Submit</b-nav-item>
