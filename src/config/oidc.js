@@ -1,10 +1,10 @@
 export const oidcSettings = {
-  authority: 'https://demo.gerdi.org/admin/auth/realms/master',
-  client_id: 'test',
-  redirect_uri: 'https://demo.gerdi.org/callback/oidc-callback',
+  authority: 'https://unity.zih.tu-dresden.de:2443/oauth2',
+  client_id: 'oauth-client',
+  redirect_uri: 'https://www.test.gerdi.org/callback/oidc-callback',
   response_type: 'id_token token',
-  scope: 'openid email roles',
+  scope: 'openid profile',
   automaticSilentRenew: true,
-  silent_redirect_uri: 'https://demo.gerdi.org/callback/silent-renew-oidc.html',
-  post_logout_redirect_uri: 'https://demo.gerdi.org'
+  silent_redirect_uri: 'https://www.test.gerdi.org/callback/silent-renew-oidc.html',
+  post_logout_redirect_uri: 'https://www.test.gerdi.org'
 }
