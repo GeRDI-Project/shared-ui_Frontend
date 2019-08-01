@@ -1,10 +1,10 @@
 export const oidcSettings = {
-  authority: 'https://www.test.gerdi.org/admin/auth/realms/master',
+  authority: 'https://' + document.location.host + '/admin/auth/realms/master',
   client_id: 'test',
-  redirect_uri: 'https://www.test.gerdi.org/callback/oidc-callback',
+  redirect_uri: 'https://' + document.location.host + '/callback/oidc-callback',
   response_type: 'id_token token',
   scope: 'openid profile',
   automaticSilentRenew: true,
-  silent_redirect_uri: 'https://www.test.gerdi.org/callback/silent-renew-oidc.html',
-  post_logout_redirect_uri: 'https://www.test.gerdi.org'
+  silent_redirect_uri: 'https://' + document.location.host + '/callback/silent-renew-oidc.html',
+  post_logout_redirect_uri: 'https://' + document.location.host
 }
