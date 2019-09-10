@@ -6,7 +6,7 @@
       <span v-else v-bind:class="{ deleted: !(this.doc._source.titles && this.doc._source.titles.length > 0)}">{{ getTitle() }}</span>
     </h4>
     <div class="publisher" v-if="doc._source.publisher">
-      <h5>{{ showPublisher(doc._source.publisher) }}</h5>
+      <h5>{{ showPublisher(doc._source.publisher.value) }}</h5>
     </div>
     <div class="creators" v-if="doc._source.creators">
       <h6> {{ doc._source.creators[0].creatorName.value }} </h6>
